@@ -7,7 +7,6 @@ import { Avatar, Grid, Typography, Divider } from "@mui/material";
 import Loader from "../shared/Loader";
 function Authors() {
   const {data, error, loading} = useQuery(GET_AUTHORS_INFO);
-  console.log({data, error, loading});
 
   if( loading) return <Loader />
   if(error) return null;
