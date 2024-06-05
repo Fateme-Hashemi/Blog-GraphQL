@@ -4,6 +4,7 @@ import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
 import { GET_POST_INFO } from "../../graphql/queries";
 import Loader from "../shared/Loader";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CommentForm from "../comment/CommentForm";
 
 
 function BlogPage() {
@@ -42,6 +43,9 @@ console.log(data)
 <div dangerouslySetInnerHTML={{__html:data.post.content.html}}>
 
 </div>
+</Grid>
+<Grid item xs={12}>
+<CommentForm slug={slug} />
 </Grid>
 </Grid>
     </Container>
