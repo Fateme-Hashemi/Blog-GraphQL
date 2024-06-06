@@ -5,6 +5,7 @@ import { GET_POST_INFO } from "../../graphql/queries";
 import Loader from "../shared/Loader";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CommentForm from "../comment/CommentForm";
+import Comment from "../comment/Comment";
 
 
 function BlogPage() {
@@ -13,7 +14,6 @@ function BlogPage() {
     const {data, loading, error} = useQuery(GET_POST_INFO, {variables: {slug}})
     if (loading) return <Loader />
 if (error) return null;
-console.log(data)
     return (
     <Container maxWidth='lg'>
 <Grid container>
@@ -25,10 +25,12 @@ console.log(data)
 </Grid>
 <Grid item xs={12} mt={6}>
     <img src={data.post.coverPhoto.url} alt={data.post.title} width='100%' style={{borderRadius: '15px'}} />
-
 </Grid>
 <Grid item xs={12} mt={7} display='flex' alignItems='center'>
-<Avatar src={data.post.author.avatar.url} sx={{width: '80px', height: '80px', marginRight: '15px'}} />
+    {data?.post?.author?.avatar?.url && (
+        <Avatar src={data?.post?.author?.avatar?.url} sx={{width: '80px', height: '80px', marginRight: '15px'}} />
+    )}
+
 <Box component='div' >
 <Typography component='p' variant="h5" fontWeight={700} >
 {data.post.author.name}
@@ -47,8 +49,11 @@ console.log(data)
 <Grid item xs={12}>
 <CommentForm slug={slug} />
 </Grid>
+<Grid item  xs={12}>
+    <Comment slug={slug} />
 </Grid>
-    </Container>
+</Grid>
+</Container>
     )
 }
 
